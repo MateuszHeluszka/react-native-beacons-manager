@@ -11,7 +11,7 @@ import { hashCode, deepCopyBeaconsLists } from './helpers';
 // #endregion
 
 // #region flow types
-export type DetectedBeacon = {
+type DetectedBeacon = {
   identifier: string,
   uuid?: string,
   major?: number,
@@ -21,16 +21,16 @@ export type DetectedBeacon = {
   distance?: number,
 };
 
-export type Section = {
+type Section = {
   key: number,
   data: Array<DetectedBeacon>,
   title: string,
   sectionId: string,
 };
 
-export type Props = any;
+type Props = any;
 
-export type State = {
+type State = {
   // region information
   uuid?: string,
   identifier: string,
@@ -82,7 +82,7 @@ class BeaconsDemo extends Component<Props, State> {
     }).cloneWithRowsAndSections(EMPTY_BEACONS_LISTS),
   };
 
-  componentDidMount() {
+  componentWillMount() {
     this._beaconsLists = EMPTY_BEACONS_LISTS;
     const { identifier, uuid } = this.state;
 
@@ -111,7 +111,9 @@ class BeaconsDemo extends Component<Props, State> {
 
     // update location to be able to monitor:
     Beacons.startUpdatingLocation();
+  }
 
+  componentDidMount() {
     // OPTIONAL: listen to authorization change
     this.authStateDidRangeEvent = Beacons.BeaconsEventEmitter.addListener(
       'authorizationStatusDidChange',

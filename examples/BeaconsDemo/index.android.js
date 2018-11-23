@@ -26,7 +26,7 @@ import { hashCode } from './helpers';
 // #endregion
 
 // #region flow types
-export type DetectedBeacon = {
+type DetectedBeacon = {
   identifier: string,
   uuid?: string,
   major?: number,
@@ -36,16 +36,16 @@ export type DetectedBeacon = {
   distance?: number,
 };
 
-export type Section = {
+type Section = {
   key: number,
   data: Array<DetectedBeacon>,
   title: string,
   sectionId: string,
 };
 
-export type Props = any;
+type Props = any;
 
-export type State = {
+type State = {
   // region information
   uuid?: string,
   identifier: string,
@@ -101,7 +101,7 @@ class BeaconsDemo extends Component<Props, State> {
   };
 
   // #region lifecycle methods
-  componentDidMount() {
+  componentWillMount() {
     //
     // ONLY non component state aware here in componentWillMount
     //
@@ -123,6 +123,9 @@ class BeaconsDemo extends Component<Props, State> {
       .catch(error =>
         console.log(`something went wrong during initialization: ${error}`),
       );
+  }
+
+  componentDidMount() {
     //
     // component state aware here - attach events
     //
